@@ -92,6 +92,12 @@ namespace VCSVersion.Configuration
             }
         }
 
+        [YamlMember(Alias = "base-version-strategies")]
+        public List<string> BaseVersionStrategies { get; set; }
+
+        [YamlMember(Alias = "log-limit")]
+        public int? LogLimit { get; set; }
+
         public BranchConfig GetConfigForBranch(string branchName)
         {
             if (branchName == null)

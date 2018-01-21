@@ -1,6 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
+using AutoFixture;
 using VCSVersion;
 using VCSVersion.SemanticVersions;
 using VCSVersion.VCS;

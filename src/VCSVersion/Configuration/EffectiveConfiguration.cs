@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using VCSVersion.AssemblyVersioning;
 using VCSVersion.VersionCalculation;
+using VCSVersion.VersionCalculation.BaseVersionCalculation;
 using VCSVersion.VersionCalculation.IncrementStrategies;
 using VCSVersion.VersionCalculation.VersionFilters;
 
@@ -31,6 +32,8 @@ namespace VCSVersion.Configuration
             int buildMetaDataPadding,
             int commitsSinceVersionSourcePadding,
             IEnumerable<IVersionFilter> versionFilters,
+            IEnumerable<IBaseVersionStrategy> baseVersionStrategies,
+            int? logLimit,
             bool tracksReleaseBranches,
             bool isCurrentBranchRelease,
             string commitDateFormat)
@@ -56,6 +59,8 @@ namespace VCSVersion.Configuration
             BuildMetaDataPadding = buildMetaDataPadding;
             CommitsSinceVersionSourcePadding = commitsSinceVersionSourcePadding;
             VersionFilters = versionFilters;
+            BaseVersionStrategies = baseVersionStrategies;
+            LogLimit = logLimit;
             TracksReleaseBranches = tracksReleaseBranches;
             IsCurrentBranchRelease = isCurrentBranchRelease;
             CommitDateFormat = commitDateFormat;
@@ -108,6 +113,10 @@ namespace VCSVersion.Configuration
         public CommitMessageIncrementMode CommitMessageIncrementing { get; }
 
         public IEnumerable<IVersionFilter> VersionFilters { get; }
+
+        public IEnumerable<IBaseVersionStrategy> BaseVersionStrategies { get; }
+
+        public int? LogLimit { get; }
 
         public string CommitDateFormat { get; }
     }

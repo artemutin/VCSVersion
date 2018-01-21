@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using AutoFixture;
+using AutoFixture.AutoMoq;
 using Moq;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
 using VCSVersion;
 using VCSVersion.SemanticVersions;
 using VCSVersion.VCS;

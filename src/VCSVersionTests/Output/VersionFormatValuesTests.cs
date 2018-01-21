@@ -9,6 +9,7 @@ using VCSVersion.Configuration;
 using VCSVersion.Output;
 using VCSVersion.SemanticVersions;
 using VCSVersion.VersionCalculation;
+using VCSVersion.VersionCalculation.BaseVersionCalculation;
 using VCSVersion.VersionCalculation.IncrementStrategies;
 using VCSVersion.VersionCalculation.VersionFilters;
 using VCSVersionTests.Configuration;
@@ -38,7 +39,10 @@ namespace VCSVersionTests.Output
                     IncrementStrategyType.Inherit,
                     "", true, "", "", false, "", "", "", "", 
                     CommitMessageIncrementMode.Enabled, 4, 4, 
-                    Enumerable.Empty<IVersionFilter>(), false, true, format);
+                    Enumerable.Empty<IVersionFilter>(),
+                    Enumerable.Empty<IBaseVersionStrategy>(),
+                    null,
+                    false, true, format);
 
             var version = new SemanticVersion(1, 0, 0, null, buildMetadata);
             var values = new VersionFormatValues(version, config);
