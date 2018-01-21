@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using System.Text;
 using VCSVersion.SemanticVersions;
 using VCSVersion.VersionCalculation;
+using VCSVersion.VersionCalculation.BaseVersionCalculation;
 
 namespace VCSVersion
 {
     public class VersionFinder
     {
+        private readonly IBaseVersionCalculator baseVersionCalculator;
+        private readonly IMetadataCalculator metadataCalculator;
+        private readonly IPreReleaseTagCalculator tagCalculator;
+
+        public VersionFinder(
+            IBaseVersionCalculator baseVersionCalculator = null,
+            IMetadataCalculator metadataCalculator = null,
+            IPreReleaseTagCalculator tagCalculator = null)
+        {
+            this.baseVersionCalculator = baseVersionCalculator;
+            this.metadataCalculator = metadataCalculator;
+            this.tagCalculator = tagCalculator;
+        }
+
         public SemanticVersion FindVersion(IVersionContext context)
         {
             var branchName = context.CurrentBranch.Name;
@@ -21,7 +36,11 @@ namespace VCSVersion
                     + "version calcuation is for metadata only.");
             }
 
-            return new NextVersionCalculator().CalculateVersion(context);
+            return new NextVersionCalculator(
+                    baseVersionCalculator,
+                    metadataCalculator,
+                    tagCalculator)
+                .CalculateVersion(context);
         }
     }
 }
